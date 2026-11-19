@@ -12,7 +12,7 @@ From the GitHub release (recommended):
 spt adapter add --release SaberMage/spt-applet-shell
 ```
 
-spt gets the `adapter.spt` asset and extracts it into its own adapter folder. No path is necessary.
+spt gets the `adapter.spt` asset and extracts it into its own adapter folder. No path is necessary. To get a newer release, run `spt adapter update applet`.
 
 From a local folder (development). Give an **absolute** path:
 

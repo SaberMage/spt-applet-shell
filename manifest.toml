@@ -1,7 +1,7 @@
 [adapter]
 name = "applet"
 kind = "shell"
-version = "0.1.0"
+version = "0.1.1"
 min_spt_core_version = "0.88.0"
 model = 2
 
@@ -9,6 +9,10 @@ model = 2
 command = "node {adapter_dir}/src/service.mjs"
 start = "bind"
 stop_grace_ms = 30000
+
+[update]
+avenue = "gh_release"
+repo = "SaberMage/spt-applet-shell"
 
 [shell]
 broadcast = "same-node"

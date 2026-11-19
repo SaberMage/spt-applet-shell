@@ -49,3 +49,8 @@ required_stages = ["impl", "unit", "int"]
 id = "REQ-SERVICE-NO-ORPHAN"
 title = "When the service ignores Quiesce, spt's forced stop leaves no service process (the service exits when spt closes the connection)"
 required_stages = ["impl", "int"]
+
+[[requirements]]
+id = "REQ-RELEASE-UPDATE"
+title = "The manifest declares the gh_release [update] avenue, so spt adapter update installs a newer GitHub release"
+required_stages = ["unit"]
