@@ -1,0 +1,51 @@
+# traceable-reqs manifest for spt-applet-shell: the registry of REQ-* requirements.
+# Stages: doc, impl, unit, int. Tag evidence on or above it: // [impl->REQ-FOO]
+
+[scan]
+roots = ["src", "scripts", "tests", "applets", "CONTEXT.md"]
+
+[policy]
+required_stages = []
+
+# ── M0: applet shell + timed send ──
+# "int": tests/int/real-spt.int.mjs (APPLET_INT=1), green 2026-11-18.
+
+[[requirements]]
+id = "REQ-FRAME-CODEC"
+title = "The service encodes and decodes v2 frames (4-byte big-endian length + JSON), across split chunks, and refuses a frame over 16 MiB"
+required_stages = ["impl", "unit"]
+
+[[requirements]]
+id = "REQ-SERVICE-CONNECT"
+title = "The service connects to SPT_SERVICE_ENDPOINT (named pipe on Windows, abstract socket on Linux) and sends Hello{token, protocol: 1} first"
+required_stages = ["impl", "unit", "int"]
+
+[[requirements]]
+id = "REQ-APPLET-RUN"
+title = "The run command starts the script in its own worker thread and replies 'started <applet_id>'; every Request row is acked"
+required_stages = ["impl", "unit", "int"]
+
+[[requirements]]
+id = "REQ-APPLET-CTX"
+title = "An applet gets ctx {id, args, sleep, say, signal}; say reaches the owner as ShellOut kind=say"
+required_stages = ["impl", "unit", "int"]
+
+[[requirements]]
+id = "REQ-APPLET-STOP"
+title = "The stop command aborts ctx.signal and terminates the worker after 5 s; a stop sends no message"
+required_stages = ["impl", "unit", "int"]
+
+[[requirements]]
+id = "REQ-APPLET-END-SILENT"
+title = "A normal applet end sends no message to the owner; an error sends one (decision D2)"
+required_stages = ["impl", "unit"]
+
+[[requirements]]
+id = "REQ-RELEASE-PACK"
+title = "scripts/pack.mjs makes dist/adapter.spt, a flat tar with manifest.toml, src/, applets/ at the root; spt runs the adapter from the extracted archive"
+required_stages = ["impl", "unit", "int"]
+
+[[requirements]]
+id = "REQ-SERVICE-NO-ORPHAN"
+title = "When the service ignores Quiesce, spt's forced stop leaves no service process (the service exits when spt closes the connection)"
+required_stages = ["impl", "int"]

@@ -1,0 +1,8 @@
+dist/
+# Local planning and template files (not public)
+PLAN.md
+M1-PLAN.md
+INSTANTIATE.md
+docs/
+docs-site/
+.claude/

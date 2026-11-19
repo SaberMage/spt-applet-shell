@@ -1,0 +1,33 @@
+[adapter]
+name = "applet"
+kind = "shell"
+version = "0.1.0"
+min_spt_core_version = "0.88.0"
+model = 2
+
+[service]
+command = "node {adapter_dir}/src/service.mjs"
+start = "bind"
+stop_grace_ms = 30000
+
+[shell]
+broadcast = "same-node"
+replies = true
+lifecycle = true
+persistent = true
+max_instances_per_owner = 1
+over_cap = "reject"
+require_approval = "remembered"
+
+[shell.capabilities.run]
+args = ["script", "args_json"]
+
+[shell.capabilities.stop]
+args = ["applet_id"]
+
+[shell.capabilities.list]
+args = []
+
+[[hints]]
+keywords = ["applet", "remind me", "timed send", "send later"]
+text = "Applets run JS/TS scripts for you: `spt shell spawn applet` once, then `spt shell cmd applet-0 run applets/timed-send.ts '{\"delay_ms\":60000,\"text\":\"...\"}'`. Also: `list`, `stop <id>`."
